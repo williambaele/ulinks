@@ -4,18 +4,18 @@ const HeroBanner = () => {
 
     const [link, setLink] = useState("ulinks.me/")
   return (
-    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center ">
+    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-[calc(100vh-64px)]">
       <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
-        <div>
+        <div className="space-y-10">
           <h1 class="block text-7xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
             Create your link-in-bio <span class="text-blue-600">seamless.</span>
           </h1>
-          <p class="mt-3 text-2xl text-gray-800 ">
+          <p class="text-2xl text-gray-800 ">
             Hand-picked professionals and expertly crafted components, designed
             for any kind of entrepreneur.
           </p>
 
-          <div class="mt-7 w-full h-12">
+          <div class=" w-full h-12">
             <form className="grid grid-cols-5 w-full h-full">
               <input
                 placeholder="Your link"
