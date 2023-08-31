@@ -4,46 +4,25 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 
-// IMPORTS 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { AuthContextProvider } from "./context/AuthContext";
+// IMPORTS
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext.js";
 
 function App() {
   // AUTH
-  const auth = getAuth();
-  const [user, setUser] = useState(null);
-  console.log(user)
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [auth]);
+  const { user } = useAuthContext();
 
   return (
     <>
-      <AuthContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route
-              path="/login"
-              element={user ? <Navigate to="/" /> : <Login />}
-            />
-            <Route
-              path="/dashboard"
-              element={user ? <Dashboard user={user}/> : <Navigate to="/" />}
-            />
-          </Routes>
-        </BrowserRouter>
-      </AuthContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home user={user} />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

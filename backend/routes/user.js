@@ -1,79 +1,23 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const validator = require('validator')
+const express = require('express')
 
-const Schema = mongoose.Schema
+// controller functions
+const { loginUser, signupUser, getUser, updateUser, getUsers } = require('../controllers/userController')
 
-const userSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  pseudo: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
-})
+const router = express.Router()
 
-// Static signup method
-userSchema.statics.signup = async function(email, pseudo, password) {
+// login route
+router.post('/login', loginUser)
 
-  // Data validation
-  if (!email || !pseudo || !password) {
-    throw Error("All fields must be filled")
-  }
-  if (!validator.isEmail(email)) {
-    throw Error("Email is invalid")
-  }
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password is not strong enough")
-  }
+//GET a single user
+router.get('/:id', getUser)
 
-  const emailExists = await this.findOne({ email })
-  if (emailExists) {
-    throw Error('Email already in use')
-  }
+//GET ALL USERS
+router.get('/', getUsers)
 
-  const pseudoExists = await this.findOne({ pseudo })
-  if (pseudoExists) {
-    throw Error('Pseudo already in use')
-  }
+//UPDATE USER
+router.patch('/:id', updateUser)
 
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
+// signup route
+router.post('/signup', signupUser)
 
-  const user = await this.create({ email, pseudo, password: hash })
-
-  return user
-}
-
-// Static login method
-
-userSchema.statics.login= async function(email, password) {
-
-  if (!email || !password) {
-    throw Error("All fields must be filled")
-  }
-
-  const user = await this.findOne({ email })
-
-  if (!user) {
-    throw Error('Incorrect email')
-  }
-
-  const match = await bcrypt.compare(password, user.password)
-
-  if (!match){
-    throw Error('Incorrect password')
-  }
-
-  return user
-}
-
-
-module.exports = mongoose.model('User', userSchema)
+module.exports = router

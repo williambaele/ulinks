@@ -2,7 +2,6 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
-
 // GET ALL USERS
 const getUsers = async (req, res) => {
   const users = await User.find({}).sort({ createdAt: -1 });
@@ -29,15 +28,15 @@ const loginUser = async (req, res) => {
 
 // SIGNUP A USER
 const signupUser = async (req, res) => {
-  const { email, pseudo, password } = req.body;
+  const { email, link, firstName, lastName, password } = req.body;
 
   try {
-    const user = await User.signup(email, pseudo, password);
+    const user = await User.signup(email, link, firstName, lastName, password);
 
     // Create a token
     const token = createToken(user._id);
 
-    res.status(200).json({ email, pseudo, token });
+    res.status(200).json({ email, link, firstName, lastName, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -45,7 +44,7 @@ const signupUser = async (req, res) => {
 // UPADTE USER
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { email, pseudo, password } = req.body;
+  const { email, link, firstName, lastName, token } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Invalid user ID" });
@@ -61,8 +60,14 @@ const updateUser = async (req, res) => {
     user.email = email;
   }
 
-  if (pseudo) {
-    user.pseudo = pseudo;
+  if (link) {
+    user.link = link;
+  }
+  if (firstName) {
+    user.firstName = firstName;
+  }
+  if (lastName) {
+    user.lastName = lastName;
   }
 
   if (password) {
@@ -93,7 +98,5 @@ const getUser = async (req, res) => {
 
   res.status(200).json(user);
 };
-
-
 
 module.exports = { signupUser, loginUser, getUser, updateUser, getUsers };

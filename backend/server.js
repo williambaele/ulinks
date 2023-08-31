@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes)
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI, { ssl: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     // listen for requests
     app.listen(process.env.PORT, () => {

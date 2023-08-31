@@ -1,38 +1,26 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
   // GET USER'S LINK FROM HOMEPAGE
   const location = useLocation();
   const linkFromHeroBanner = location.state ? location.state.link : "";
+  const { signup, error, isLoading } = useSignup();
 
   // SINGUP METHOD
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [link, setLink] = useState("");
   const [password, setPassword] = useState("");
   const [errormsg, setErrorMsg] = useState("");
-  const { createUser } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg("");
-    try {
-      await createUser(email, password);
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error.code, error.message);
-      if (error.code === "auth/weak-password") {
-        setErrorMsg("Weak password (min 6 characters)");
-      } else if (error.code === "auth/email-already-in-use") {
-        setErrorMsg("Email already used");
-      } else {
-        setErrorMsg(error.message);
-      }
-    }
+    await signup(email, firstName, lastName, link, password);
   };
   return (
     <div class="bg-gray-100 flex h-screen  items-center md:py-16">
@@ -91,9 +79,10 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="Link"
-                    value={linkFromHeroBanner}
+                    defaultValuevalue={linkFromHeroBanner}
                     class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                     required
+                    onChange={(e) => setLink(e.target.value)}
                   />
                 </div>
 
@@ -114,10 +103,10 @@ const Signup = () => {
                   Sign up
                 </button>
                 {errormsg && (
-                <p className="text-xs font-medium text-center text-red-600">
-                  {errormsg}
-                </p>
-              )}
+                  <p className="text-xs font-medium text-center text-red-600">
+                    {errormsg}
+                  </p>
+                )}
               </form>
             </div>
           </div>
