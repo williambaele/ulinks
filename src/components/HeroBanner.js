@@ -16,22 +16,22 @@ const HeroBanner = () => {
           </p>
 
           <div class=" w-full h-12">
-            <form className="grid grid-cols-5 w-full h-full">
+            <form className="grid w-full h-full grid-cols-5">
               <input
                 placeholder="Your link"
                 value={link}
                 onChange={(e) => setLink(e.target.value)}
                 type="text"
-                className="rounded-2xl rounded-r-none col-span-4 pl-4 outline-none text-gray-400 bg-white"
+                className="col-span-4 pl-4 text-gray-400 bg-white rounded-r-none outline-none rounded-2xl"
               ></input>
-              <button className="col-span-1 bg-purple-400 rounded-2xl rounded-l-none font-bold">
+              <button className="col-span-1 bg-[#ffc971] rounded-2xl rounded-l-none font-bold text-gray-700">
                 Claim my link
               </button>
             </form>
           </div>
         </div>
 
-        <div class="h-full bg-green-400 ml-4 w-full"></div>
+        <div class="h-full bg-gray-200 ml-4 w-full rounded-xl"></div>
       </div>
     </div>
   );
