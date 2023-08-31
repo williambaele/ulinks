@@ -7,7 +7,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <a
             href="/"
-            className="flex-none text-xl font-semibold dark:text-white"
+            className="flex-none text-xl font-semibold"
             aria-label="Brand"
           >
             uLinks
