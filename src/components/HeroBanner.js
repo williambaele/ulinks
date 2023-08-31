@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const HeroBanner = () => {
-  const [link, setLink] = useState("");
+  const [link, setLink] = useState("ulinks.me/");
 
   return (
     <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-[calc(100vh-64px)]">
@@ -20,7 +20,8 @@ const HeroBanner = () => {
             <form className="grid w-full h-full grid-cols-5">
               <input
                 placeholder="Your link"
-                value={link}
+                defaultValue={link}
+                
                 onChange={(e) => setLink(e.target.value)}
                 type="text"
                 className="col-span-4 pl-4 text-gray-400 bg-white rounded-r-none outline-none rounded-2xl"
