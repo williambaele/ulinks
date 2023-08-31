@@ -71,7 +71,7 @@ const Header = () => {
             <div className="h-full p-3 px-5 bg-[#ffc971] rounded-full">
 
             <a
-              href="/"
+              href="/login"
               className="flex items-center font-medium text-gray-700 "
               >
               <svg

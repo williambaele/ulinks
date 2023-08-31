@@ -1,34 +1,25 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
-const Signup = () => {
-  // GET USER'S LINK FROM HOMEPAGE
-  const location = useLocation();
-  const linkFromHeroBanner = location.state ? location.state.link : "";
-
-  // SINGUP METHOD
-  const navigate = useNavigate();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errormsg, setErrorMsg] = useState("");
-  const { createUser } = UserAuth();
+  const navigate = useNavigate();
+  const { signIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg("");
     try {
-      await createUser(email, password);
+      await signIn(email, password);
       navigate("/dashboard");
     } catch (error) {
       console.log(error.code, error.message);
-      if (error.code === "auth/weak-password") {
-        setErrorMsg("Weak password (min 6 characters)");
-      } else if (error.code === "auth/email-already-in-use") {
-        setErrorMsg("Email already used");
+      if (error.code === "auth/wrong-password") {
+        setErrorMsg("Wrong password");
+      } else if (error.code === "auth/user-not-found") {
+        setErrorMsg("User not found");
       } else {
         setErrorMsg(error.message);
       }
@@ -41,13 +32,13 @@ const Signup = () => {
           <div class="p-4 sm:p-7">
             <div class="text-center">
               <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
-                Sign up
+                Login
               </h1>
               <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Already have an account?
+                Dont have an account?
                 <a
                   class="text-blue-600 decoration-2 hover:underline font-medium"
-                  href="/login"
+                  href="/signup"
                 >
                   Sign in here
                 </a>
@@ -59,41 +50,13 @@ const Signup = () => {
                 className="grid gap-4 md:grid-cols-2"
                 onSubmit={handleSubmit}
               >
-                <div>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-                    required
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-                    required
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </div>
-
-                <div>
+                <div className="md:col-span-2">
                   <input
                     type="email"
                     placeholder="Email"
                     class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                     required
                     onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Link"
-                    value={linkFromHeroBanner}
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-                    required
                   />
                 </div>
 
@@ -114,10 +77,10 @@ const Signup = () => {
                   Sign up
                 </button>
                 {errormsg && (
-                <p className="text-xs font-medium text-center text-red-600">
-                  {errormsg}
-                </p>
-              )}
+                  <p className="text-xs font-medium text-center text-red-600">
+                    {errormsg}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -127,4 +90,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
