@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const HeroBanner = () => {
+  const [link, setLink] = useState("");
 
-    const [link, setLink] = useState("ulinks.me/")
   return (
     <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-[calc(100vh-64px)]">
       <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
@@ -24,9 +25,13 @@ const HeroBanner = () => {
                 type="text"
                 className="col-span-4 pl-4 text-gray-400 bg-white rounded-r-none outline-none rounded-2xl"
               ></input>
-              <button className="col-span-1 bg-[#ffc971] rounded-2xl rounded-l-none font-bold text-gray-700">
+              <Link
+                to="/signup"
+                state={{ link: link }}
+                className="flex items-center justify-center col-span-1 bg-[#ffc971] rounded-2xl rounded-l-none font-bold text-gray-700"
+              >
                 Claim my link
-              </button>
+              </Link>
             </form>
           </div>
         </div>
