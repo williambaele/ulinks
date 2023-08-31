@@ -32,7 +32,7 @@ const Faq = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
 
   return (
-    <div class="w-full px-4 mx-auto h-screen flex items-center">
+    <div class="w-full px-4 mx-auto h-full flex items-center py-20">
       <div class="grid md:grid-cols-5 gap-10">
         <div class="md:col-span-2">
           <div class="max-w-xs">
