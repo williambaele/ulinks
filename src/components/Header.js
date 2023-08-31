@@ -57,10 +57,10 @@ const Header = () => {
               Apps
             </a>
             <a
-              href="/"
+              href="/#avantages"
               className="font-medium text-gray-500 hover:text-gray-400 md:py-6"
             >
-              How it works
+              Avantages
             </a>
             <a
               href="/"
