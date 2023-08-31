@@ -14,6 +14,7 @@ function App() {
   // AUTH
   const auth = getAuth();
   const [user, setUser] = useState(null);
+  console.log(user)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -32,10 +33,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={user ? <Navigate to="/" /> : <Login />}
+            />
             <Route
               path="/dashboard"
-              element={user ? <Dashboard /> : <Navigate to="/" />}
+              element={user ? <Dashboard user={user}/> : <Navigate to="/" />}
             />
           </Routes>
         </BrowserRouter>

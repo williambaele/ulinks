@@ -1,9 +1,10 @@
 import React from 'react';
+import UserHeader from '../components/UserHeader';
 
-const Dashboard = () => {
+const Dashboard = ({user}) => {
     return (
         <div className="w-full h-screen bg-red-100">
-            <p>logged in</p>
+            <UserHeader user={user}/>
         </div>
     );
 };
