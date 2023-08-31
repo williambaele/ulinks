@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Faq = () => {
   const questions = [
@@ -28,8 +28,10 @@ const Faq = () => {
         "Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.",
     },
   ];
+
+  const [activeQuestion, setActiveQuestion] = useState("");
   return (
-    <div class="w-full px-4 mx-auto h-screen bg-red-200 flex items-center">
+    <div class="w-full px-4 mx-auto h-screen bg-purple-200 flex items-center">
       <div class="grid md:grid-cols-5 gap-10 bg-green-200">
         <div class="md:col-span-2">
           <div class="max-w-xs">
@@ -46,18 +48,19 @@ const Faq = () => {
 
         <div class="md:col-span-3">
           <div class="hs-accordion-group divide-y divide-gray-200 dark:divide-gray-700">
-            {questions.map((question) => (
+            {questions.map((question, index) => (
               <div
+                key={index}
                 class="hs-accordion pb-3 active"
                 id="hs-basic-with-title-and-arrow-stretched-heading-one"
               >
                 <button
-                  class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
+                  class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500"
                   aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one"
                 >
                   {question.title}
                   <svg
-                    class="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
+                    class="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500"
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"
@@ -72,7 +75,7 @@ const Faq = () => {
                     />
                   </svg>
                   <svg
-                    class="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
+                    class="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500"
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"
