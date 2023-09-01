@@ -7,8 +7,8 @@ const UserHeader = ({ user }) => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   return (
-    <header className="sticky inset-x-0 z-50 flex flex-wrap w-full h-16 text-sm top-4 md:justify-start md:flex-nowrap">
-      <nav className="relative w-full px-4 py-3 mx-2 bg-white border border-gray-200 rounded-full md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
+    <header className="sticky inset-x-0 z-40 flex flex-wrap w-full h-16 text-sm top-4 md:justify-start md:flex-nowrap">
+      <nav className="w-full px-4 py-3 mx-2 bg-white border border-gray-200 rounded-full md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
         <div className="flex items-center justify-between">
           <a
             href="/"
@@ -50,7 +50,6 @@ const UserHeader = ({ user }) => {
           </div>
         </div>
         <div
-          id="navbar-collapse-with-animation"
           className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block"
         >
           <div className="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
@@ -73,27 +72,27 @@ const UserHeader = ({ user }) => {
             >
               FAQ
             </a>
-            <div className="relative inline-block">
+            <div className="inline-block z-60">
               <p
                 onClick={toggleDropdown}
-                className="flex items-center font-medium text-gray-700 uppercase"
+                className="flex items-center p-1 font-medium text-gray-700 uppercase border rounded-full cursor-pointer"
               >
                 {user.email.charAt(0)}
               </p>
               {isDropdownOpen && (
                 <div
                 id="dropdown"
-                className="absolute right-0 z-50 p-2 mt-2 bg-white rounded-lg shadow-md top-full w-max"
+                className="absolute z-50 p-2 mt-2 bg-gray-100 rounded-lg shadow-md right-10 top-12 w-max"
               >
-                  <div class="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg ">
+                  <div class="py-3 px-5 -m-2 bg-gray-300 rounded-t-lg relative z-90">
                     <p class="text-sm text-gray-500 ">Signed in as</p>
-                    <p class="text-sm font-medium text-gray-800 dark:text-gray-300">
+                    <p class="text-sm font-medium text-gray-800">
                       james@site.com
                     </p>
                   </div>
-                  <div class="mt-2 py-2 first:pt-0 last:pb-0">
+                  <div class="mt-2 py-2 bg-gray-100">
                     <a
-                      class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                      class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                       href="/"
                     >
                       <svg
