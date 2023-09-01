@@ -27,10 +27,15 @@ export const useLogin = () => {
         console.log(json);
         // Extract the user email & link from the response data
         const { email } = json;
+        const { pseudo } = json;
+
         const { link } = json;
         const { _id } = json;
 
-        dispatch({ type: "LOGIN", payload: { ...json, email, link, _id } });
+        dispatch({
+          type: "LOGIN",
+          payload: { ...json, email, pseudo, link, _id },
+        });
 
         localStorage.setItem("user", JSON.stringify(json));
 

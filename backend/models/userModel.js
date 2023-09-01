@@ -26,12 +26,24 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+
+  pseudo: {
+    type: String,
+    required: true,
+  },
 });
 
 // Static signup method
-userSchema.statics.signup = async function (email, firstName, lastName, link, password) {
+userSchema.statics.signup = async function (
+  email,
+  firstName,
+  lastName,
+  link,
+  pseudo,
+  password
+) {
   // Data validation
-  if (!email || !firstName || !lastName || !link || !password) {
+  if (!email || !firstName || !lastName || !link || !password || !pseudo) {
     throw Error("All fields must be filled");
   }
   if (!validator.isEmail(email)) {
@@ -39,6 +51,11 @@ userSchema.statics.signup = async function (email, firstName, lastName, link, pa
   }
   if (!validator.isStrongPassword(password)) {
     throw Error("Password is not strong enough");
+  }
+
+  const pseudoExists = await this.findOne({ pseudo });
+  if (pseudoExists) {
+    throw Error("Pseudo already in use");
   }
 
   const emailExists = await this.findOne({ email });
@@ -54,7 +71,14 @@ userSchema.statics.signup = async function (email, firstName, lastName, link, pa
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, firstName, lastName, link, password: hash });
+  const user = await this.create({
+    email,
+    pseudo,
+    firstName,
+    lastName,
+    link,
+    password: hash,
+  });
 
   return user;
 };

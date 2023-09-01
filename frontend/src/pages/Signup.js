@@ -13,6 +13,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [link, setLink] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +21,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(email, firstName, lastName, link, password);
+    await signup(email, firstName, lastName, pseudo, link, password);
   };
   return (
     <div class="bg-gray-100 flex h-screen  items-center md:py-16">
@@ -63,6 +64,15 @@ const Signup = () => {
                     class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                     required
                     onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Pseudo"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    required
+                    onChange={(e) => setPseudo(e.target.value)}
                   />
                 </div>
 
