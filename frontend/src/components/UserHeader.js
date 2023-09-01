@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useLogout } from "../hooks/useLogout";
 
 const UserHeader = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  //LOG OUT
+  const { logout } = useLogout();
+  const handleClick = () => {
+    logout();
   };
   return (
     <header className="sticky inset-x-0 z-40 flex flex-wrap w-full h-16 text-sm top-4 md:justify-start md:flex-nowrap">
@@ -49,9 +56,7 @@ const UserHeader = ({ user }) => {
             </button>
           </div>
         </div>
-        <div
-          className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block"
-        >
+        <div className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block">
           <div className="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
             <a
               href="/"
@@ -81,13 +86,13 @@ const UserHeader = ({ user }) => {
               </p>
               {isDropdownOpen && (
                 <div
-                id="dropdown"
-                className="absolute z-50 p-2 mt-2 bg-gray-100 rounded-lg shadow-md right-10 top-12 w-max"
-              >
+                  id="dropdown"
+                  className="absolute z-50 p-2 mt-2 bg-gray-100 rounded-lg shadow-md right-10 top-12 w-max"
+                >
                   <div class="py-3 px-5 -m-2 bg-gray-300 rounded-t-lg relative z-90">
                     <p class="text-sm text-gray-500 ">Signed in as</p>
                     <p class="text-sm font-medium text-gray-800">
-                      james@site.com
+                      {user.email}
                     </p>
                   </div>
                   <div class="mt-2 py-2 bg-gray-100">
@@ -110,21 +115,29 @@ const UserHeader = ({ user }) => {
                       </svg>
                       Downloads
                     </a>
-                    <a
-                      class="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                      href="/"
+                    <div
+                      onClick={handleClick}
+                      class="cursor-pointer flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2  hover:text-red-400"
                     >
                       <svg
-                        class="flex-none"
+                        xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
-                        viewBox="0 0 16 16"
                         fill="currentColor"
+                        class="bi bi-box-arrow-right"
+                        viewBox="0 0 16 16"
                       >
-                        <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+                        />
                       </svg>
-                      Team Account
-                    </a>
+                      Log out
+                    </div>
                   </div>
                 </div>
               )}
