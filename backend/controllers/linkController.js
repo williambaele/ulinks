@@ -52,48 +52,48 @@ const createLink = async (req, res) => {
 };
 
 // DELETE A LINK
-const deleteTask = async (req, res) => {
+const deleteLink = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such task" });
+    return res.status(404).json({ error: "No such link" });
   }
 
-  const task = await Task.findOneAndDelete({ _id: id });
+  const link = await Link.findOneAndDelete({ _id: id });
 
-  if (!task) {
-    return res.status(400).json({ error: "No such task" });
+  if (!link) {
+    return res.status(400).json({ error: "No such link" });
   }
 
-  res.status(200).json(task);
+  res.status(200).json(link);
 };
 
-// UPDATE A TASK
-const updateTask = async (req, res) => {
+// UPDATE A LINK
+const updateLink = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such task" });
+    return res.status(404).json({ error: "No such link" });
   }
 
-  const task = await Task.findOneAndUpdate(
+  const link = await Link.findOneAndUpdate(
     { _id: id },
     {
       ...req.body,
     }
   );
 
-  if (!task) {
-    return res.status(400).json({ error: "No such task" });
+  if (!link) {
+    return res.status(400).json({ error: "No such link" });
   }
 
-  res.status(200).json(task);
+  res.status(200).json(link);
 };
 
 module.exports = {
-  getTasks,
-  getTask,
-  createTask,
-  deleteTask,
-  updateTask,
+  getLinks,
+  getLink,
+  createLink,
+  deleteLink,
+  updateLink,
 };
