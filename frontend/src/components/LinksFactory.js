@@ -126,7 +126,8 @@ const LinksFactory = () => {
     },
   ];
 
-  console.log(socialMedias.length);
+  const [selectedMedia, setSelectedMedia] = useState("");
+  console.log(selectedMedia);
   return (
     <div className="w-full h-full px-2 py-10 space-y-4">
       <div className="space-y-4 bg-purple-300">
@@ -137,7 +138,10 @@ const LinksFactory = () => {
       </div>
       <div className="flex justify-center">
         <button
-          onClick={() => setIsVisible(!isVisible)}
+          onClick={() => {
+            setIsVisible(!isVisible); // Close the media selection
+            setSelectedMedia(""); // Set the selected media
+          }}
           className="flex items-center gap-2 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
         >
           <svg
@@ -159,11 +163,14 @@ const LinksFactory = () => {
       </div>
       {isVisible ? (
         <div
-        onClick={() => setIsVisible(false)}
           className={`p-2 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 h-fit gap-2 bg-white rounded-xl shadow-sm`}
         >
           {socialMedias.map((item, index) => (
             <div
+              onClick={() => {
+                setIsVisible(false); // Close the media selection
+                setSelectedMedia(item.name); // Set the selected media
+              }}
               key={index}
               className="cursor-pointer flex flex-col items-center justify-center p-2 hover:bg-[#f3f3f1] rounded-lg"
             >
@@ -175,6 +182,11 @@ const LinksFactory = () => {
       ) : (
         ""
       )}
+      {selectedMedia !== "" ? (
+        <div className="flex items-center p-2 bg-white shadow-sm rounded-xl h-14">
+          {selectedMedia}
+        </div>
+      ) : null}
     </div>
   );
 };
