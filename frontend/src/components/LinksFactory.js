@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useLinksContext } from "../hooks/useLinksContext";
 
-const LinksFactory = () => {
+const LinksFactory = ({ user }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const socialMedias = [
@@ -126,8 +127,46 @@ const LinksFactory = () => {
     },
   ];
 
-  const [selectedMedia, setSelectedMedia] = useState("");
-  console.log(selectedMedia);
+  const [socialMedia, setSocialMedia] = useState("");
+
+  // LINK CREATION
+  const [error, setError] = useState(null);
+  const [link, setLink] = useState("");
+  const { dispatch } = useLinksContext();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    //Checking if the user is logged in
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
+    //Adding data to the task's creation
+    const task = {
+      link,
+      socialMedia,
+      user_id: user._id,
+    };
+    const response = await fetch("/api/links", {
+      method: "POST",
+      body: JSON.stringify(task),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+      console.log("error");
+    }
+    if (response.ok) {
+      dispatch({ type: "CREATE_LINK", payload: json });
+    }
+  };
+
   return (
     <div className="w-full h-full px-2 py-10 space-y-4">
       <div className="space-y-4 bg-purple-300">
@@ -140,7 +179,7 @@ const LinksFactory = () => {
         <button
           onClick={() => {
             setIsVisible(!isVisible); // Close the media selection
-            setSelectedMedia(""); // Set the selected media
+            setSocialMedia(""); // Set the selected media to null to disable the div
           }}
           className="flex items-center gap-2 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
         >
@@ -169,7 +208,7 @@ const LinksFactory = () => {
             <div
               onClick={() => {
                 setIsVisible(false); // Close the media selection
-                setSelectedMedia(item.name); // Set the selected media
+                setSocialMedia(item.name); // Set the selected media
               }}
               key={index}
               className="cursor-pointer flex flex-col items-center justify-center p-2 hover:bg-[#f3f3f1] rounded-lg"
@@ -182,9 +221,25 @@ const LinksFactory = () => {
       ) : (
         ""
       )}
-      {selectedMedia !== "" ? (
-        <div className="flex items-center p-2 bg-white shadow-sm rounded-xl h-14">
-          {selectedMedia}
+      {socialMedia !== "" ? (
+        <div className="flex items-center w-full p-2 bg-white shadow-sm rounded-xl h-14">
+          <form
+            className="grid w-full h-full grid-cols-4 gap-4"
+            onSubmit={handleSubmit}
+          >
+            <input
+              placeholder={`Your ${socialMedia} link`}
+              type="text"
+              className="col-span-3 pl-4 bg-gray-200 outline-none rounded-xl"
+              onChange={(e) => setLink(e.target.value)}
+            ></input>
+            <button
+              type="submit"
+              className="h-full bg-gray-300 rounded-full hover:bg-gray-400"
+            >
+              Add
+            </button>
+          </form>
         </div>
       ) : null}
     </div>

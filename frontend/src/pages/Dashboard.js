@@ -8,7 +8,7 @@ const Dashboard = ({ user }) => {
       <UserHeader user={user} />
       <div className="w-full h-[calc(100vh-64px)] grid md:grid-cols-5 gap-2">
         <div className="md:border-r md:col-span-3">
-            <LinksFactory/>
+            <LinksFactory user={user}/>
         </div>
         <div className="items-center justify-center hidden md:flex md:col-span-2">
           <IphoneMockup user={user}/>
