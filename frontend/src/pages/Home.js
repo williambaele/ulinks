@@ -6,11 +6,11 @@ import Footer from "../components/Footer";
 import Faq from "../components/Faq";
 
 
-const Home = () => {
+const Home = ({user}) => {
   return (
     <>
       <div className="flex flex-col bg-[#f3f3f1] px-4">
-        <Header />
+        <Header user={user}/>
         <HeroBanner />
         <AppsSection />
         <Faq/>

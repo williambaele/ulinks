@@ -1,13 +1,14 @@
+// IMPORTS
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext.js";
+
+
 //PAGES
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 
-// IMPORTS
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext.js";
 
 function App() {
   // AUTH
@@ -18,9 +19,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home user={user} />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/signup"
+            element={!user ? <Signup /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
+          <Route path="/dashboard" element={!user ? <Login /> : <Dashboard user={user} />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,30 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errormsg, setErrorMsg] = useState("");
-  const navigate = useNavigate();
-  // const { signIn } = UserAuth();
+  const { login, error } = useLogin();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await signIn(email, password);
-  //     navigate("/dashboard");
-  //   } catch (error) {
-  //     console.log(error.code, error.message);
-  //     if (error.code === "auth/wrong-password") {
-  //       setErrorMsg("Wrong password");
-  //     } else if (error.code === "auth/user-not-found") {
-  //       setErrorMsg("User not found");
-  //     } else {
-  //       setErrorMsg(error.message);
-  //     }
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(email, password);
+  };
+
   return (
     <div class="bg-gray-100 flex h-screen  items-center md:py-16">
       <div class="w-full max-w-xl mx-auto p-6">
@@ -48,7 +35,7 @@ const Login = () => {
             <div class="mt-5">
               <form
                 className="grid gap-4 md:grid-cols-2"
-                // onSubmit={handleSubmit}
+                onSubmit={handleSubmit}
               >
                 <div className="md:col-span-2">
                   <input

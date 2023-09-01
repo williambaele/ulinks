@@ -25,11 +25,12 @@ export const useLogin = () => {
       } else {
         const json = await response.json();
         console.log(json);
-        // Extract the user pseudo & ID from the response data
-        const { pseudo } = json;
+        // Extract the user email & link from the response data
+        const { email } = json;
+        const { link } = json;
         const { _id } = json;
 
-        dispatch({ type: "LOGIN", payload: { ...json, pseudo, _id } });
+        dispatch({ type: "LOGIN", payload: { ...json, email, link, _id } });
 
         localStorage.setItem("user", JSON.stringify(json));
 

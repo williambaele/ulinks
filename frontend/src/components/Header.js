@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <header className="sticky inset-x-0 z-50 flex flex-wrap w-full h-16 text-sm top-4 md:justify-start md:flex-nowrap">
       <nav className="relative w-full px-4 py-3 mx-2 bg-white border border-gray-200 rounded-full md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
@@ -68,25 +68,25 @@ const Header = () => {
             >
               FAQ
             </a>
-            <div className="h-full p-3 px-5 bg-[#ffc971] rounded-full">
-
-            <a
-              href="/login"
-              className="flex items-center font-medium text-gray-700 "
-              >
-              <svg
-                class="w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
+            {!user ? (
+              <div className="h-full p-3 px-5 bg-[#ffc971] rounded-full">
+                <a
+                  href="/login"
+                  className="flex items-center font-medium text-gray-700 "
                 >
-                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-              </svg>
-              Log in
-            </a>
-                </div>
+                  Log in
+                </a>
+              </div>
+            ) : (
+              <div className="h-full p-3 px-5 bg-[#ffc971] rounded-full">
+                <a
+                  href="/dashboard"
+                  className="flex items-center font-medium text-gray-700 "
+                >
+                  Dashboard
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </nav>

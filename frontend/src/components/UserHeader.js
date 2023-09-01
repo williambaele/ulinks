@@ -71,7 +71,7 @@ const UserHeader = ({ user }) => {
             </a>
             <div className="h-full p-3 px-5 bg-[#ffc971] rounded-full">
               <p className="flex items-center font-medium text-gray-700 uppercase">
-                {user.email.charAt(0)}
+                {user.email}
               </p>
               <div
                 class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700"
