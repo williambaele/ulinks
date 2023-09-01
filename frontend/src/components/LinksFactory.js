@@ -2,8 +2,14 @@ import React from "react";
 
 const LinksFactory = () => {
   return (
-    <div className="w-full h-full py-10 bg-red-200">
-      <div className="flex justify-end bg-blue-200">
+    <div className="w-full h-full px-2 py-10">
+      <div className="space-y-4 bg-purple-300">
+        <p className="text-lg">Your bio</p>
+        <form className="w-full">
+          <input type="text" className="w-full"></input>
+        </form>
+      </div>
+      <div className="flex justify-end">
         <button className="flex items-center gap-2 p-2 px-5 font-bold text-gray-800 bg-[#ffc971] rounded-2xl">
           <svg
             xmlns="http://www.w3.org/2000/svg"

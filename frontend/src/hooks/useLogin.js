@@ -28,7 +28,6 @@ export const useLogin = () => {
         // Extract the user email & link from the response data
         const { email } = json;
         const { pseudo } = json;
-
         const { link } = json;
         const { _id } = json;
 
