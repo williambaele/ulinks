@@ -1,6 +1,7 @@
 import React from "react";
 
-const IphoneMockup = ({ user }) => {
+const IphoneMockup = ({ user, userLinks }) => {
+  console.log(userLinks)
   return (
     <div class="relative mx-auto border-gray-800  bg-gray-800 border-[14px] rounded-[2.5rem] md:h-[600px] h-[350px] md:w-[300px] w-[180px] flex justify-center">
       <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
@@ -11,6 +12,11 @@ const IphoneMockup = ({ user }) => {
       <p className="absolute left-0 right-0 font-bold text-center bottom-10">
         ulinks.me/{user.link}
       </p>
+      <ul>
+        {userLinks.map((link, index) =>
+        <li key={index} className="text-red-400">{link.link}</li>
+        )}
+      </ul>
       <p className="absolute left-0 right-0 p-2 text-xl font-bold text-center border-2 top-10 rounded-3xl">
         {user.pseudo}
       </p>

@@ -3,35 +3,49 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 import { useLinksContext } from "./hooks/useLinksContext";
 
-
 //PAGES
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 function App() {
   //DISPATCH
-  const { link, dispatch: linksDispatch } = useLinksContext();
+  const { links, dispatch: linksDispatch } = useLinksContext();
   // AUTH
   const { user } = useAuthContext();
 
   // ALL LINKS
-  //ALL TASKS
   useEffect(() => {
     const fetchLinks = async () => {
       const response = await fetch("/api/links");
       const json = await response.json();
 
       if (response.ok) {
-        linksDispatch({ type: "SET_TASKS", payload: json });
+        linksDispatch({ type: "SET_LINKS", payload: json });
+      } else {
+        console.log("error")
       }
     };
 
     fetchLinks();
   }, [linksDispatch]);
+
+  console.log(links);
+
+  // USER'S LINKS
+  const [userLinks, setUserLinks] = useState([]);
+
+  useEffect(() => {
+    if (user && links) {
+      (async () => {
+        // Filter links based on user._id
+        const userItems = links.filter((link) => link.user === user._id);
+        setUserLinks(userItems);
+      })();
+    }
+  }, [links, user]);
 
 
   return (
@@ -47,7 +61,16 @@ function App() {
             path="/login"
             element={!user ? <Login /> : <Navigate to="/" />}
           />
-          <Route path="/dashboard" element={!user ? <Login /> : <Dashboard user={user} />} />
+          <Route
+            path="/dashboard"
+            element={
+              !user ? (
+                <Login />
+              ) : (
+                <Dashboard user={user} userLinks={userLinks} />
+              )
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

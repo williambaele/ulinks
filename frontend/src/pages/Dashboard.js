@@ -2,7 +2,7 @@ import React from "react";
 import UserHeader from "../components/UserHeader";
 import IphoneMockup from "../components/IphoneMockup";
 import LinksFactory from "../components/LinksFactory";
-const Dashboard = ({ user }) => {
+const Dashboard = ({ user, userLinks }) => {
   return (
     <div className="w-full h-screen px-4 bg-[#f3f3f1]">
       <UserHeader user={user} />
@@ -11,7 +11,7 @@ const Dashboard = ({ user }) => {
             <LinksFactory user={user}/>
         </div>
         <div className="items-center justify-center hidden md:flex md:col-span-2">
-          <IphoneMockup user={user}/>
+          <IphoneMockup user={user} userLinks={userLinks}/>
         </div>
       </div>
     </div>
