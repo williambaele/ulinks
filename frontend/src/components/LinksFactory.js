@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLinksContext } from "../hooks/useLinksContext";
 
-const LinksFactory = ({ user }) => {
+const LinksFactory = ({ user, userLinks }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const socialMedias = [
@@ -133,7 +133,7 @@ const LinksFactory = ({ user }) => {
   const [error, setError] = useState(null);
   const [link, setLink] = useState("");
   const { dispatch } = useLinksContext();
-  console.log(user._id)
+  console.log(user._id);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -169,7 +169,7 @@ const LinksFactory = ({ user }) => {
   };
 
   return (
-    <div className="w-full h-full px-2 py-10 space-y-4">
+    <div className="w-full h-screen px-2 py-10 space-y-4">
       <div className="space-y-4 bg-purple-300">
         <p className="text-lg">Your bio</p>
         <form className="w-full">
@@ -243,8 +243,16 @@ const LinksFactory = ({ user }) => {
           </form>
         </div>
       ) : null}
-      <div className="h-10 bg-purple-100">
-        
+      <div className="space-y-4 overflow-auto h-80">
+        {userLinks && userLinks.length > 0 ? (
+          userLinks.map((link, index) => (
+            <div key={index} className="h-10 bg-white rounded shadow-sm">
+              {link.socialMedia}
+            </div>
+          ))
+        ) : (
+          <p>No user links available.</p>
+        )}
       </div>
     </div>
   );
