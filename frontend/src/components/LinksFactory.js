@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLinksContext } from "../hooks/useLinksContext";
+import FlipMove from "react-flip-move";
 
 const LinksFactory = ({ user, userLinks }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -169,90 +170,94 @@ const LinksFactory = ({ user, userLinks }) => {
   };
 
   return (
-    <div className="w-full h-screen px-2 py-10 space-y-4">
-      <div className="space-y-4 bg-purple-300">
+    <div className="w-full max-h-screen px-2 py-20">
+      <div className="space-y-4 bg-purple-300 h-1/5">
         <p className="text-lg">Your bio</p>
         <form className="w-full">
           <input type="text" className="w-full"></input>
         </form>
       </div>
-      <div className="flex justify-center">
-        <button
-          onClick={() => {
-            setIsVisible(!isVisible); // Close the media selection
-            setSocialMedia(""); // Set the selected media to null to disable the div
-          }}
-          className="flex items-center gap-2 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            strokeWidth="4"
-            fill="currentColor"
-            class="bi bi-plus-lg"
-            viewBox="0 0 16 16"
+      <div className="bg-green-500 h-4/5">
+        <div className="flex justify-center">
+          <button
+            onClick={() => {
+              setIsVisible(!isVisible); // Close the media selection
+              setSocialMedia(""); // Set the selected media to null to disable the div
+            }}
+            className="flex items-center gap-2 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
-            />
-          </svg>
-          <p>Link</p>
-        </button>
-      </div>
-      {isVisible ? (
-        <div
-          className={`p-2 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 h-fit gap-2 bg-white rounded-xl shadow-sm`}
-        >
-          {socialMedias.map((item, index) => (
-            <div
-              onClick={() => {
-                setIsVisible(false); // Close the media selection
-                setSocialMedia(item.name); // Set the selected media
-              }}
-              key={index}
-              className="cursor-pointer flex flex-col items-center justify-center p-2 hover:bg-[#f3f3f1] rounded-lg"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              strokeWidth="4"
+              fill="currentColor"
+              class="bi bi-plus-lg"
+              viewBox="0 0 16 16"
             >
-              {item.logo}
-              {item.name}
-            </div>
-          ))}
+              <path
+                fill-rule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+              />
+            </svg>
+            <p>Link</p>
+          </button>
         </div>
-      ) : (
-        ""
-      )}
-      {socialMedia !== "" ? (
-        <div className="flex items-center w-full p-2 bg-white shadow-sm rounded-xl h-14">
-          <form
-            className="grid w-full h-full grid-cols-4 gap-4"
-            onSubmit={handleSubmit}
+        {isVisible ? (
+          <div
+            className={`p-2 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 h-fit gap-2 bg-white rounded-xl shadow-sm`}
           >
-            <input
-              placeholder={`Your ${socialMedia} link`}
-              type="text"
-              className="col-span-3 pl-4 bg-gray-200 outline-none rounded-xl"
-              onChange={(e) => setLink(e.target.value)}
-            ></input>
-            <button
-              type="submit"
-              className="h-full bg-gray-300 rounded-full hover:bg-gray-400"
-            >
-              Add
-            </button>
-          </form>
-        </div>
-      ) : null}
-      <div className="space-y-4 overflow-auto h-80">
-        {userLinks && userLinks.length > 0 ? (
-          userLinks.map((link, index) => (
-            <div key={index} className="h-10 bg-white rounded shadow-sm">
-              {link.socialMedia}
-            </div>
-          ))
+            {socialMedias.map((item, index) => (
+              <div
+                onClick={() => {
+                  setIsVisible(false); // Close the media selection
+                  setSocialMedia(item.name); // Set the selected media
+                }}
+                key={index}
+                className="cursor-pointer flex flex-col items-center justify-center p-2 hover:bg-[#f3f3f1] rounded-lg"
+              >
+                {item.logo}
+                {item.name}
+              </div>
+            ))}
+          </div>
         ) : (
-          <p>No user links available.</p>
+          ""
         )}
+        {socialMedia !== "" ? (
+          <div className="flex items-center w-full p-2 bg-white shadow-sm rounded-xl h-14">
+            <form
+              className="grid w-full h-full grid-cols-4 gap-4"
+              onSubmit={handleSubmit}
+            >
+              <input
+                placeholder={`Your ${socialMedia} link`}
+                type="text"
+                className="col-span-3 pl-4 bg-gray-200 outline-none rounded-xl"
+                onChange={(e) => setLink(e.target.value)}
+              ></input>
+              <button
+                type="submit"
+                className="h-full bg-gray-300 rounded-full hover:bg-gray-400"
+              >
+                Add
+              </button>
+            </form>
+          </div>
+        ) : null}
+        <div className="h-full space-y-10 overflow-scroll">
+          {userLinks && userLinks.length > 0 ? (
+            <FlipMove>
+              {userLinks.map((link) => (
+                <div key={link.id} className="h-10 m-2 bg-white rounded shadow-sm">
+                  {link.socialMedia}
+                </div>
+              ))}
+            </FlipMove>
+          ) : (
+            <p>No user links available.</p>
+          )}
+        </div>
       </div>
     </div>
   );
