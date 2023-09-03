@@ -133,7 +133,7 @@ const LinksFactory = ({ user }) => {
   const [error, setError] = useState(null);
   const [link, setLink] = useState("");
   const { dispatch } = useLinksContext();
-
+  console.log(user._id)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -164,6 +164,7 @@ const LinksFactory = ({ user }) => {
     }
     if (response.ok) {
       dispatch({ type: "CREATE_LINK", payload: json });
+      setSocialMedia("");
     }
   };
 

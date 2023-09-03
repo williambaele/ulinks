@@ -35,7 +35,7 @@ export const linksReducer = (state = initialState, action) => {
 
 export const LinksContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(linksReducer, {
-    items: null,
+    links: [],
   });
 
   return (
