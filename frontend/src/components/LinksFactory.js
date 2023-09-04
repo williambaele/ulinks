@@ -33,12 +33,12 @@ const LinksFactory = ({ user, userLinks }) => {
                   d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
                 />
               </svg>
-              <p>Link</p>
+              <p>Linak</p>
             </button>
           </div>
           <div className="grid overflow-scroll h-5/6">
             <LinksCreator user={user} userLinks={userLinks} />
-            <LinksShowroom user={user} userLinks={userLinks} />
+            <LinksShowroom userLinks={userLinks} />
           </div>
         </div>
       </div>

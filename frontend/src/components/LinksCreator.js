@@ -236,22 +236,6 @@ const LinksCreator = ({user, userLinks}) => {
           </form>
         </div>
       ) : null}
-      <div className="grid overflow-scroll h-5/6">
-        {userLinks && userLinks.length > 0 ? (
-          <FlipMove>
-            {userLinks.map((link) => (
-              <div
-                key={link.id}
-                className="h-10 my-1 bg-white rounded shadow-sm"
-              >
-                {link.socialMedia}
-              </div>
-            ))}
-          </FlipMove>
-        ) : (
-          <p>No user links available.</p>
-        )}
-      </div>
     </div>
   );
 };
