@@ -1,17 +1,11 @@
-import React from 'react';
+import React from "react";
+import LinkRow from "./LinkRow";
 
 const LinksShowroom = ({ userLinks }) => {
   return (
-    <div>
+    <div  className="grid gap-2">
       {userLinks && userLinks.length > 0 ? (
-        userLinks.map((link) => (
-          <div
-            key={link.id} 
-            className="flex items-center justify-center h-16 my-1 bg-white rounded shadow-sm"
-          >
-            {link.socialMedia}
-          </div>
-        ))
+        userLinks.map((link) => <LinkRow key={link.id} link={link} />)
       ) : (
         <p>No user links available.</p>
       )}
