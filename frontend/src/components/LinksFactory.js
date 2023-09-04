@@ -170,7 +170,8 @@ const LinksFactory = ({ user, userLinks }) => {
   };
 
   return (
-    <div className="w-full max-h-screen px-2 py-20">
+    <div className="w-full h-[calc(100vh-64px)] px-2 py-10">
+      <h2 className="text-4xl font-large">Manage your links</h2>
       <div className="space-y-4 bg-purple-300 h-1/5">
         <p className="text-lg">Your bio</p>
         <form className="w-full">
@@ -245,11 +246,14 @@ const LinksFactory = ({ user, userLinks }) => {
             </form>
           </div>
         ) : null}
-        <div className="h-full space-y-10 overflow-scroll">
+        <div className="max-h-full space-y-2 overflow-scroll">
           {userLinks && userLinks.length > 0 ? (
             <FlipMove>
               {userLinks.map((link) => (
-                <div key={link.id} className="h-10 m-2 bg-white rounded shadow-sm">
+                <div
+                  key={link.id}
+                  className="h-10 m-2 bg-white rounded shadow-sm"
+                >
                   {link.socialMedia}
                 </div>
               ))}

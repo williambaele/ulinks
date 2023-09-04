@@ -14,8 +14,8 @@ const UserHeader = ({ user }) => {
     logout();
   };
   return (
-    <header className="sticky inset-x-0 z-40 flex flex-wrap w-full h-16 text-sm top-4 md:justify-start md:flex-nowrap">
-      <nav className="w-full px-4 py-3 mx-2 bg-white border border-gray-200 rounded-full md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
+    <header className="sticky flex flex-wrap w-full h-16 text-sm md:justify-start md:flex-nowrap">
+      <nav className="w-full px-4 py-3 mx-2 bg-white rounded-full md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
         <div className="flex items-center justify-between">
           <a
             href="/"
