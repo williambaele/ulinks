@@ -8,7 +8,7 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
   const [error, setError] = useState(null);
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
-  const [errorMsg, setErrorMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState("");
   const { dispatch } = useLinksContext();
 
   const handleSubmit = async (e) => {
@@ -23,17 +23,18 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
     const linkRegex = /^(http|https):\/\/[^ "]+$/;
     if (!link.match(linkRegex)) {
       setError("link");
-      setErrorMsg("Please enter a valid link")
+      setErrorMsg("Please enter a valid link");
 
       return;
     }
+    // Validate the title
     if (title === "" || title == null) {
-        setError("title");
-        setErrorMsg("Please enter a valid title")
-        return;
-      }
-    //Adding data to the task's creation
-    const task = {
+      setError("title");
+      setErrorMsg("Please enter a valid title");
+      return;
+    }
+    //Adding data to the link's creation
+    const linkData = {
       link,
       title,
       socialMedia,
@@ -41,7 +42,7 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
     };
     const response = await fetch("/api/links", {
       method: "POST",
-      body: JSON.stringify(task),
+      body: JSON.stringify(linkData),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
@@ -208,13 +209,17 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
             <input
               placeholder={`Title`}
               type="text"
-              className={` ${error === "title" ? "border-red-500 border": ""} p-2 pl-4 bg-gray-200 outline-none rounded-xl`}
+              className={` ${
+                error === "title" ? "border-red-500 border" : ""
+              } p-2 pl-4 bg-gray-200 outline-none rounded-xl`}
               onChange={(e) => setTitle(e.target.value)}
             />
             <input
               placeholder={`Your ${socialMedia} link`}
               type="text"
-              className={` ${error === "link" ? "border-red-500 border": ""} p-2 pl-4 bg-gray-200 outline-none rounded-xl`}
+              className={` ${
+                error === "link" ? "border-red-500 border" : ""
+              } p-2 pl-4 bg-gray-200 outline-none rounded-xl`}
               onChange={(e) => setLink(e.target.value)}
             />
             {errorMsg && <p className="text-red-500">{errorMsg}</p>}
