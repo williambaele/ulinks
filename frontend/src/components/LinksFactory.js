@@ -39,7 +39,7 @@ const LinksFactory = ({ user, userLinks }) => {
           </div>
           <div className="grid overflow-scroll h-5/6">
             {visibleLinks === true ? (
-              <LinksShowroom userLinks={userLinks} />
+              <LinksShowroom user={user} userLinks={userLinks} />
             ) : (
               <LinksCreator user={user} userLinks={userLinks} />
             )}
