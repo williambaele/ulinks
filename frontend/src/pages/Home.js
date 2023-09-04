@@ -5,15 +5,14 @@ import AppsSection from "../components/AppsSection";
 import Footer from "../components/Footer";
 import Faq from "../components/Faq";
 
-
-const Home = ({user}) => {
+const Home = ({ user }) => {
   return (
     <>
+      <Header user={user} />
       <div className="flex flex-col bg-[#f3f3f1] px-4">
-        <Header user={user}/>
         <HeroBanner />
         <AppsSection />
-        <Faq/>
+        <Faq />
       </div>
       <Footer />
     </>
