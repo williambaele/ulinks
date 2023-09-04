@@ -12,11 +12,9 @@ const IphoneMockup = ({ user, userLinks }) => {
       <p className="absolute left-0 right-0 font-bold text-center bottom-10">
         ulinks.me/{user.link}
       </p>
-      <ul>
-        {userLinks.map((link, index) =>
-        <li key={index} className="text-red-400">{link.link}</li>
-        )}
-      </ul>
+      <p className="absolute left-0 right-0 font-bold text-center top-50">
+        {userLinks.length}
+      </p>
       <p className="absolute left-0 right-0 p-2 text-xl font-bold text-center border-2 top-10 rounded-3xl">
         {user.pseudo}
       </p>

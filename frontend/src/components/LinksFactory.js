@@ -46,7 +46,7 @@ const LinksFactory = ({ user, userLinks }) => {
           </div>
         </div>
       </div>
-      <div className="bg-orange-100 h-1/5">
+      <div className="h-1/5">
         <UserBio/>
       </div>
     </div>
