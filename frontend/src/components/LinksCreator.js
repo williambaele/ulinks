@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import FlipMove from "react-flip-move";
 import { useLinksContext } from "../hooks/useLinksContext";
 
-const LinksCreator = ({user, userLinks}) => {
+const LinksCreator = ({ user, userLinks }) => {
   const [socialMedia, setSocialMedia] = useState("");
 
   // LINK CREATION
@@ -165,56 +164,27 @@ const LinksCreator = ({user, userLinks}) => {
       ),
     },
   ];
-  const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <div className="h-full">
-      <div className="flex justify-center h-1/6">
-        <button
-          onClick={() => {
-            setIsVisible(!isVisible); // Close the media selection
-            setSocialMedia(""); // Set the selected media to null to disable the div
-          }}
-          className="h-10 flex items-center gap-4 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            strokeWidth="4"
-            fill="currentColor"
-            class="bi bi-plus-lg"
-            viewBox="0 0 16 16"
+    <div className="h-full space-y-6">
+      <div
+        className={`p-2 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 h-fit gap-2 bg-white rounded-xl shadow-sm`}
+      >
+        {socialMedias.map((item, index) => (
+          <div
+            onClick={() => {
+              setSocialMedia(item.name); // Set the selected media
+            }}
+            key={index}
+            className={`${
+              socialMedia === item.name ? "bg-[#f3f3f1]" : ""
+            } cursor-pointer flex flex-col items-center justify-center p-2 hover:bg-[#f3f3f1] rounded-lg`}
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
-            />
-          </svg>
-          <p>Link</p>
-        </button>
+            {item.logo}
+            {item.name}
+          </div>
+        ))}
       </div>
-      {isVisible ? (
-        <div
-          className={`p-2 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 h-fit gap-2 bg-white rounded-xl shadow-sm`}
-        >
-          {socialMedias.map((item, index) => (
-            <div
-              onClick={() => {
-                setIsVisible(false); // Close the media selection
-                setSocialMedia(item.name); // Set the selected media
-              }}
-              key={index}
-              className="cursor-pointer flex flex-col items-center justify-center p-2 hover:bg-[#f3f3f1] rounded-lg"
-            >
-              {item.logo}
-              {item.name}
-            </div>
-          ))}
-        </div>
-      ) : (
-        ""
-      )}
       {socialMedia !== "" ? (
         <div className="flex items-center w-full p-2 bg-white shadow-sm rounded-xl h-14">
           <form

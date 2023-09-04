@@ -6,8 +6,8 @@ const LinksShowroom = ({ userLinks }) => {
       {userLinks && userLinks.length > 0 ? (
         userLinks.map((link) => (
           <div
-            key={link.id}
-            className="h-10 my-1 bg-white rounded shadow-sm"
+            key={link.id} 
+            className="flex items-center justify-center h-16 my-1 bg-white rounded shadow-sm"
           >
             {link.socialMedia}
           </div>
