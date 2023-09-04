@@ -26,7 +26,7 @@ const getLink = async (req, res) => {
 
 // CREATE NEW LINK
 const createLink = async (req, res) => {
-  const { socialMedia, link, user_id } = req.body;
+  const { socialMedia, link, title, user_id } = req.body;
   let emptyFields = [];
 
   if (!socialMedia) {
@@ -35,13 +35,16 @@ const createLink = async (req, res) => {
   if (!link) {
     emptyFields.push("link ");
   }
+  if (!title) {
+    emptyFields.push("title ");
+  }
   if (emptyFields.length > 0) {
     return res
       .status(400)
       .json({ error: "Some information is missing: ", emptyFields });
   }
 
-  const linkData = { socialMedia, link, user: user_id };
+  const linkData = { socialMedia, link, title, user: user_id };
   // ADD DOC TO DB
   try {
     const link = await Link.create(linkData);

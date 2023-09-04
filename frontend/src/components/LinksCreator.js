@@ -7,6 +7,8 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
   // LINK CREATION
   const [error, setError] = useState(null);
   const [link, setLink] = useState("");
+  const [title, setTitle] = useState("");
+  const [errorMsg, setErrorMsg] = useState("")
   const { dispatch } = useLinksContext();
 
   const handleSubmit = async (e) => {
@@ -17,9 +19,23 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
       setError("You must be logged in");
       return;
     }
+    // Validate the link input using a regular expression
+    const linkRegex = /^(http|https):\/\/[^ "]+$/;
+    if (!link.match(linkRegex)) {
+      setError("link");
+      setErrorMsg("Please enter a valid link")
+
+      return;
+    }
+    if (title === "" || title == null) {
+        setError("title");
+        setErrorMsg("Please enter a valid title")
+        return;
+      }
     //Adding data to the task's creation
     const task = {
       link,
+      title,
       socialMedia,
       user_id: user._id,
     };
@@ -187,20 +203,25 @@ const LinksCreator = ({ user, setVisibleLinks }) => {
         ))}
       </div>
       {socialMedia !== "" ? (
-        <div className="flex items-center w-full p-2 bg-white shadow-sm rounded-xl h-14">
-          <form
-            className="grid w-full h-full grid-cols-4 gap-4"
-            onSubmit={handleSubmit}
-          >
+        <div className="flex items-center w-full p-2 bg-white shadow-sm rounded-xl h-fit">
+          <form className="grid w-full h-full gap-4" onSubmit={handleSubmit}>
+            <input
+              placeholder={`Title`}
+              type="text"
+              className={` ${error === "title" ? "border-red-500 border": ""} p-2 pl-4 bg-gray-200 outline-none rounded-xl`}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <input
               placeholder={`Your ${socialMedia} link`}
               type="text"
-              className="col-span-3 pl-4 bg-gray-200 outline-none rounded-xl"
+              className={` ${error === "link" ? "border-red-500 border": ""} p-2 pl-4 bg-gray-200 outline-none rounded-xl`}
               onChange={(e) => setLink(e.target.value)}
-            ></input>
+            />
+            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+
             <button
               type="submit"
-              className="h-full bg-gray-300 rounded-full hover:bg-gray-400"
+              className="h-full bg-[#ffc971] rounded-full hover:bg-[#ffc971]/80 p-1"
             >
               Add
             </button>
