@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLinksContext } from "../hooks/useLinksContext";
 
-const LinksCreator = ({ user, userLinks }) => {
+const LinksCreator = ({ user, setVisibleLinks }) => {
   const [socialMedia, setSocialMedia] = useState("");
 
   // LINK CREATION
@@ -40,6 +40,7 @@ const LinksCreator = ({ user, userLinks }) => {
     if (response.ok) {
       dispatch({ type: "CREATE_LINK", payload: json });
       setSocialMedia("");
+      setVisibleLinks(true);
     }
   };
   const socialMedias = [

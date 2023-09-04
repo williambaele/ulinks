@@ -133,7 +133,7 @@ const LinkRow = ({ link, user }) => {
     );
   }
   return (
-    <div className="relative h-20 bg-red-100 rounded-2xl">
+    <div className="relative h-20 transition-shadow duration-700 bg-red-100 rounded-2xl ">
       <div className="absolute top-0 right-0 flex items-center justify-center w-32 h-8 gap-4 bg-white shadow-sm rounded-tr-2xl rounded-bl-2xl">
         <div>
           {active ? (

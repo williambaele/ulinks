@@ -3,6 +3,7 @@ import LinksCreator from "./LinksCreator";
 import LinksShowroom from "./LinksShowroom";
 import UserBio from "./UserBio";
 
+
 const LinksFactory = ({ user, userLinks }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [socialMedia, setSocialMedia] = useState("");
@@ -41,8 +42,8 @@ const LinksFactory = ({ user, userLinks }) => {
             {visibleLinks === true ? (
               <LinksShowroom user={user} userLinks={userLinks} />
             ) : (
-              <LinksCreator user={user} userLinks={userLinks} />
-            )}
+              <LinksCreator user={user} userLinks={userLinks} setVisibleLinks={setVisibleLinks} />
+              )}
           </div>
         </div>
       </div>
