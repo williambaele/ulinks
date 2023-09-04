@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLinksContext } from "../hooks/useLinksContext";
 import FlipMove from "react-flip-move";
+import LinksCreator from "./LinksCreator";
 
 const LinksFactory = ({ user, userLinks }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -170,9 +171,18 @@ const LinksFactory = ({ user, userLinks }) => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-64px)] px-2 py-10">
-      <h2 className="text-4xl font-large">Manage your links</h2>
-      <div className="space-y-4 bg-purple-300 h-1/5">
+    <div className="w-full h-[calc(100vh-64px)] px-4 py-10 bg-red-100">
+      <div className="h-full bg-green-100">
+        <LinksCreator/>
+      </div>
+    </div>
+  );
+};
+
+export default LinksFactory;
+
+{
+  /* <div className="space-y-4 bg-purple-300 h-1/5">
         <p className="text-lg">Your bio</p>
         <form className="w-full">
           <input type="text" className="w-full"></input>
@@ -262,9 +272,5 @@ const LinksFactory = ({ user, userLinks }) => {
             <p>No user links available.</p>
           )}
         </div>
-      </div>
-    </div>
-  );
-};
-
-export default LinksFactory;
+      </div> */
+}
