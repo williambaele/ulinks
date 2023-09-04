@@ -175,7 +175,7 @@ const LinksCreator = ({user, userLinks}) => {
             setIsVisible(!isVisible); // Close the media selection
             setSocialMedia(""); // Set the selected media to null to disable the div
           }}
-          className="flex items-center gap-2 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
+          className="h-10 flex items-center gap-4 p-2 px-10 font-bold text-gray-800 bg-[#ffc971] rounded-2xl"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
