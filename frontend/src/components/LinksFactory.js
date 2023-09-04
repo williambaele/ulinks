@@ -8,7 +8,7 @@ const LinksFactory = ({ user, userLinks }) => {
   const [socialMedia, setSocialMedia] = useState("");
   const [visibleLinks, setVisibleLinks] = useState(true);
   return (
-    <div className="w-full h-[calc(100vh-64px)] px-4 py-10 ">
+    <div className="w-full h-[calc(100vh-64px)] px-4 py-10 space-y-6">
       <div className="h-4/5">
         <div className="h-full">
           <div className="flex items-center justify-center h-1/6">
