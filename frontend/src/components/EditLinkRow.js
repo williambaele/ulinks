@@ -2,25 +2,27 @@ import React, { useState } from "react";
 
 const EditLinkRow = ({ link }) => {
   const [socialMedia, setSocialMedia] = useState(link.socialMedia);
-  console.log(link.socialMedia);
-
+  const [editLink, setEditLink] = useState(link.link);
   const socialMediaAvailable = ["Instagram", "TikTok", "Facebook"];
   return (
-    <div className="grid items-center w-full h-20 grid-cols-5">
-      <div className="flex items-center w-full h-full bg-purple-200">
+    <div className="grid items-center w-full h-20 grid-cols-5 gap-4">
+      <div className="flex items-center w-full h-full ">
         <select
-          className="w-full p-2 bg-red-100 "
+          className="w-full p-2 bg-[#f3f3f1] rounded-xl"
           onChange={(e) => setSocialMedia(e.target.value)}
         >
           {socialMediaAvailable.map((item) => (
             <option>{item}</option>
           ))}
         </select>
-        <input type="text"></input>
-        <p>{link.socialMedia}</p>
       </div>
       <div className="flex items-center h-full col-span-3 bg-red-200">
-        <p>{link.link}</p>
+        <input
+          type="text"
+          className="w-full p-2 bg-[#f3f3f1] rounded-xl"
+          onChange={(e) => setEditLink(e.target.value)}
+          value={editLink}
+        />
       </div>
       <div className="flex items-center h-full bg-green-200">
         <svg
