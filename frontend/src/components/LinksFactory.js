@@ -4,7 +4,7 @@ import LinksShowroom from "./LinksShowroom";
 import UserBio from "./UserBio";
 
 
-const LinksFactory = ({ user, userLinks }) => {
+const LinksFactory = ({ user, userActiveLinks }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [socialMedia, setSocialMedia] = useState("");
   const [visibleLinks, setVisibleLinks] = useState(true);
@@ -40,9 +40,9 @@ const LinksFactory = ({ user, userLinks }) => {
           </div>
           <div className="grid overflow-scroll h-5/6">
             {visibleLinks === true ? (
-              <LinksShowroom user={user} userLinks={userLinks} />
+              <LinksShowroom user={user} userActiveLinks={userActiveLinks} />
             ) : (
-              <LinksCreator user={user} userLinks={userLinks} setVisibleLinks={setVisibleLinks} />
+              <LinksCreator user={user} userActiveLinks={userActiveLinks} setVisibleLinks={setVisibleLinks} />
               )}
           </div>
         </div>

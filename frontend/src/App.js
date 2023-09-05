@@ -35,14 +35,14 @@ function App() {
   console.log(links);
 
   // USER'S LINKS
-  const [userLinks, setUserLinks] = useState([]);
+  const [userActiveLinks, setUserActiveLinks] = useState([]);
 
   useEffect(() => {
     if (user && links) {
       (async () => {
         // Filter links based on user._id
         const userItems = links.filter((link) => link.user === user._id);
-        setUserLinks(userItems);
+        setUserActiveLinks(userItems);
       })();
     }
   }, [links, user]);
@@ -67,7 +67,7 @@ function App() {
               !user ? (
                 <Login />
               ) : (
-                <Dashboard user={user} userLinks={userLinks} />
+                <Dashboard user={user} userActiveLinks={userActiveLinks} />
               )
             }
           />

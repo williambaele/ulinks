@@ -16,6 +16,10 @@ const linkSchema = new Schema(
       type: String,
       required: true,
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
