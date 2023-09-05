@@ -110,13 +110,13 @@ const NormalLinkRow = ({ link }) => {
   }
   return (
     <div className="flex items-center w-full h-20 gap-4">
-      <div className="flex items-center justify-center w-1/6 h-full bg-purple-200">
+      <div className="flex items-center justify-center w-1/6 h-full ">
         <p>{socialIcon}</p>
       </div>
-      <div className="flex items-center w-3/6 h-full bg-red-200">
+      <div className="flex items-center w-3/6 h-full">
         <p className="text-lg font-large">{link.title}</p>
       </div>
-      <div className="flex items-center w-2/6 h-full bg-green-200">
+      <div className="flex items-center w-2/6 h-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
