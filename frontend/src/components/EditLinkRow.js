@@ -5,11 +5,20 @@ const EditLinkRow = ({ link }) => {
   const [editLink, setEditLink] = useState(link.link);
   const [editTitle, setEditTitle] = useState(link.title);
 
-  const socialMediaAvailable = ["Instagram", "TikTok", "Facebook"];
+  const socialMediaAvailable = [
+    "Instagram",
+    "TikTok",
+    "Facebook",
+    "Twitter",
+    "Youtube",
+    "Whatsapp",
+    "Other",
+  ];
   return (
     <div className="flex items-center w-full h-20 gap-4">
-      <div className="flex items-center w-1/6 w-full h-full">
+      <div className="flex items-center w-1/6 h-full">
         <select
+          value={socialMedia}
           className="w-full p-2 bg-[#f3f3f1] rounded-xl"
           onChange={(e) => setSocialMedia(e.target.value)}
         >
@@ -27,7 +36,7 @@ const EditLinkRow = ({ link }) => {
         />
       </div>
       <div className="flex items-center w-2/6 h-full bg-green-200">
-      <input
+        <input
           type="text"
           className="w-full p-2 bg-[#f3f3f1] rounded-xl"
           onChange={(e) => setEditLink(e.target.value)}
