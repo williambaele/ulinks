@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import ClientRow from "../components/ClientRow";
+import { Link } from "react-router-dom";
 
 const UserPage = ({ user, links }) => {
   // LOADER LOGIC
@@ -37,7 +38,9 @@ const UserPage = ({ user, links }) => {
           ))}
         </div>
         <div className="flex items-center justify-center h-1/6">
-          <h1 className="text-xl font-bold text-center">uLinks</h1>
+          <Link to="/">
+            <h1 className="text-xl font-bold text-center">uLinks</h1>
+          </Link>
         </div>
       </div>
     </div>
