@@ -22,7 +22,7 @@ const UserPage = ({ user, links }) => {
   }, []);
 
   //CONDITONAL RENDERING
-  if (!isLoaded) {
+  if (isLoaded === false) {
     return <Loader />;
   }
 
