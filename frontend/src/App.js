@@ -26,27 +26,25 @@ function App() {
       if (response.ok) {
         linksDispatch({ type: "SET_LINKS", payload: json });
       } else {
-        console.log("error")
+        console.log("error");
       }
     };
 
     fetchLinks();
   }, [linksDispatch]);
 
+  // ACTIVE USER'S LINKS
+  const [userLinks, setUserLinks] = useState([]);
 
-
-   // ACTIVE USER'S LINKS
-   const [userLinks, setUserLinks] = useState([]);
-
-   useEffect(() => {
-     if (user && links) {
-       (async () => {
-         // Filter links based on user._id
-         const userItems = links.filter((link) => link.user === user._id);
-         setUserLinks(userItems);
-       })();
-     }
-   }, [links, user]);
+  useEffect(() => {
+    if (user && links) {
+      (async () => {
+        // Filter links based on user._id
+        const userItems = links.filter((link) => link.user === user._id);
+        setUserLinks(userItems);
+      })();
+    }
+  }, [links, user]);
 
   // ACTIVE USER'S LINKS
   const [userActiveLinks, setUserActiveLinks] = useState([]);
@@ -55,12 +53,13 @@ function App() {
     if (user && links) {
       (async () => {
         // Filter links based on user._id
-        const userItems = links.filter((link) => link.user === user._id && link.active === true);
+        const userItems = links.filter(
+          (link) => link.user === user._id && link.active === true
+        );
         setUserActiveLinks(userItems);
       })();
     }
   }, [links, user]);
-
 
   // ALL USERS
   const [allUsers, setAllUsers] = useState([]);
@@ -72,14 +71,12 @@ function App() {
       if (response.ok) {
         setAllUsers(json);
       } else {
-        console.log("error")
+        console.log("error");
       }
     };
 
     fetchLinks();
   }, []);
-
-
 
   return (
     <>
@@ -90,7 +87,7 @@ function App() {
             <Route
               key={user._id}
               path={`/${user.pseudo}`}
-              element={<UserPage user={user}  />}
+              element={<UserPage user={user} links={links} />}
             />
           ))}
           <Route
@@ -107,7 +104,11 @@ function App() {
               !user ? (
                 <Login />
               ) : (
-                <Dashboard user={user} userActiveLinks={userActiveLinks} userLinks={userLinks}/>
+                <Dashboard
+                  user={user}
+                  userActiveLinks={userActiveLinks}
+                  userLinks={userLinks}
+                />
               )
             }
           />
