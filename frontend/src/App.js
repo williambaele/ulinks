@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import { useEffect, useState } from "react";
+import UserPage from "./pages/UserPage.js";
 
 function App() {
   //DISPATCH
@@ -61,11 +62,37 @@ function App() {
   }, [links, user]);
 
 
+  // ALL USERS
+  const [allUsers, setAllUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchLinks = async () => {
+      const response = await fetch("/api/user");
+      const json = await response.json();
+      if (response.ok) {
+        setAllUsers(json);
+      } else {
+        console.log("error")
+      }
+    };
+
+    fetchLinks();
+  }, []);
+
+
+
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home user={user} />} />
+          {allUsers.map((user) => (
+            <Route
+              key={user._id}
+              path={`/${user.pseudo}`}
+              element={<UserPage user={user}  />}
+            />
+          ))}
           <Route
             path="/signup"
             element={!user ? <Signup /> : <Navigate to="/" />}

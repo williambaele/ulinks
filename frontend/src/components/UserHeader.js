@@ -77,7 +77,7 @@ const UserHeader = ({ user }) => {
             >
               FAQ
             </a>
-            <div className="inline-block z-60">
+            <div className="inline-block z-90">
               <p
                 onClick={toggleDropdown}
                 className="flex items-center p-1 font-medium text-gray-700 uppercase border rounded-full cursor-pointer"
