@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
+import ClientRow from "../components/ClientRow";
 
 const UserPage = ({ user, links }) => {
   // LOADER LOGIC
@@ -26,16 +27,17 @@ const UserPage = ({ user, links }) => {
 
   return (
     <div className="h-screen bg-[#f3f3f1] px-4 py-20 flex justify-center flex-col">
-      <div className="container h-full mx-auto bg-red-100">
-        <div className="flex items-center justify-center bg-green-300 h-1/6">
+      <div className="container h-full mx-auto ">
+        <div className="flex items-center justify-center h-1/6">
           <h1 className="text-3xl font-bold text-center">@{user.pseudo}</h1>
         </div>
-        <div className="bg-orange-500 h-5/6">
-          <ul>
-            {userLinks.map((link, index) => (
-              <li key={index._id}>{link.title}</li>
-            ))}
-          </ul>
+        <div className="w-1/2 mx-auto space-y-4 h-4/6">
+          {userLinks.map((link) => (
+            <ClientRow link={link} key={link._id} />
+          ))}
+        </div>
+        <div className="flex items-center justify-center h-1/6">
+          <h1 className="text-xl font-bold text-center">uLinks</h1>
         </div>
       </div>
     </div>
