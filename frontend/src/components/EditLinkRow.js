@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useLinksContext } from "../hooks/useLinksContext";
 
-const EditLinkRow = ({ link }) => {
+const EditLinkRow = ({ link, user }) => {
   const [socialMedia, setSocialMedia] = useState(link.socialMedia);
   const [editLink, setEditLink] = useState(link.link);
   const [editTitle, setEditTitle] = useState(link.title);
+  const { dispatch } = useLinksContext();
 
   const socialMediaAvailable = [
     "Instagram",
@@ -14,6 +16,37 @@ const EditLinkRow = ({ link }) => {
     "Whatsapp",
     "Other",
   ];
+
+
+  //EDIT LINK DATA
+  const handleEdit = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      return;
+    }
+
+    const updatedLink = {
+      ...link,
+      active: true,
+    };
+
+    try {
+      const response = await fetch(`/api/links/${link._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(updatedLink),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: "UPDATE_LINK", payload: updatedLink });
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
   return (
     <div className="flex items-center w-full h-20 gap-4">
       <div className="flex items-center w-1/6 h-full">

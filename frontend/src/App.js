@@ -32,16 +32,29 @@ function App() {
     fetchLinks();
   }, [linksDispatch]);
 
-  console.log(links);
 
-  // USER'S LINKS
+
+   // ACTIVE USER'S LINKS
+   const [userLinks, setUserLinks] = useState([]);
+
+   useEffect(() => {
+     if (user && links) {
+       (async () => {
+         // Filter links based on user._id
+         const userItems = links.filter((link) => link.user === user._id);
+         setUserLinks(userItems);
+       })();
+     }
+   }, [links, user]);
+
+  // ACTIVE USER'S LINKS
   const [userActiveLinks, setUserActiveLinks] = useState([]);
 
   useEffect(() => {
     if (user && links) {
       (async () => {
         // Filter links based on user._id
-        const userItems = links.filter((link) => link.user === user._id);
+        const userItems = links.filter((link) => link.user === user._id && link.active === true);
         setUserActiveLinks(userItems);
       })();
     }
@@ -67,7 +80,7 @@ function App() {
               !user ? (
                 <Login />
               ) : (
-                <Dashboard user={user} userActiveLinks={userActiveLinks} />
+                <Dashboard user={user} userActiveLinks={userActiveLinks} userLinks={userLinks}/>
               )
             }
           />

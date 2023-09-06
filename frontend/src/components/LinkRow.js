@@ -4,7 +4,8 @@ import EditLinkRow from "./EditLinkRow";
 import NormalLinkRow from "./NormalLinkRow";
 
 const LinkRow = ({ link, user }) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(link.active);
+
   //DELETE LINK
   const { dispatch } = useLinksContext();
   const handleDeleteTask = async (linkId) => {
@@ -27,7 +28,65 @@ const LinkRow = ({ link, user }) => {
     }
   };
 
-  
+  //SWITCH TO ACTIVE LINK
+  const handleEditActive = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      return;
+    }
+
+    const updatedLink = {
+      ...link,
+      active: true,
+    };
+
+    try {
+      const response = await fetch(`/api/links/${link._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(updatedLink),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: "UPDATE_LINK", payload: updatedLink });
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  //SWITCH TO INACTIVE LINK
+  const handleEditNotActive = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      return;
+    }
+
+    const updatedLink = {
+      ...link,
+      active: false,
+    };
+
+    try {
+      const response = await fetch(`/api/links/${link._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(updatedLink),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: "UPDATE_LINK", payload: updatedLink });
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   //EDIT LOGIC
   const [isEdit, setIsEdit] = useState(false);
@@ -35,7 +94,7 @@ const LinkRow = ({ link, user }) => {
     <div className="relative h-20 transition-shadow duration-700 bg-red-100 rounded-2xl ">
       <div className="absolute top-0 right-0 flex items-center justify-center w-32 h-8 gap-4 bg-white shadow-sm rounded-tr-2xl rounded-bl-2xl">
         <div>
-          {active ? (
+          {active === false ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -43,7 +102,12 @@ const LinkRow = ({ link, user }) => {
               fill="currentColor"
               class="bi bi-toggle-off cursor-pointer"
               viewBox="0 0 16 16"
-              onClick={() => setActive(!active)}
+              onClick={(e) => {
+                e.preventDefault();
+
+                setActive(!active);
+                handleEditActive(e);
+              }}
             >
               <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z" />
             </svg>
@@ -55,8 +119,12 @@ const LinkRow = ({ link, user }) => {
               fill="green"
               class="bi bi-toggle-on cursor-pointer"
               viewBox="0 0 16 16"
-              onClick={() => setActive(!active)}
-            >
+              onClick={(e) => {
+                e.preventDefault();
+
+                setActive(!active);
+                handleEditNotActive(e);
+              }}            >
               <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" />
             </svg>
           )}
@@ -103,8 +171,7 @@ const LinkRow = ({ link, user }) => {
         </svg>
       </div>
       <div className="flex items-center h-full px-4 bg-white gap-x-4 rounded-2xl">
-        {isEdit ? <EditLinkRow link={link} /> : <NormalLinkRow link={link} />}
-       
+        {isEdit ? <EditLinkRow link={link} user={user} /> : <NormalLinkRow link={link} />}
       </div>
     </div>
   );
