@@ -37,7 +37,9 @@ const HeroBanner = () => {
           </div>
         </div>
 
-        <div class="h-full bg-gray-200 ml-4 w-full rounded-xl"></div>
+        <div class="h-full w-full rounded-xl object-center object-none	">
+          <img className="object-cover rounded-xl" src="https://images.pexels.com/photos/5081925/pexels-photo-5081925.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Sharing social networks"/>
+        </div>
       </div>
     </div>
   );
