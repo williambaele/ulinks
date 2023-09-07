@@ -58,31 +58,21 @@ const UserHeader = ({ user }) => {
         </div>
         <div className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block">
           <div className="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-            <a
-              href="/"
-              className="font-medium text-gray-500 md:py-6 "
-              aria-current="page"
-            >
-              Apps
-            </a>
-            <a
-              href="/#avantages"
-              className="font-medium text-gray-500 hover:text-gray-400 md:py-6"
-            >
-              Avantages
-            </a>
-            <a
-              href="/"
-              className="font-medium text-gray-500 hover:text-gray-400 md:py-6"
-            >
-              FAQ
-            </a>
             <div className="inline-block z-90">
               <p
                 onClick={toggleDropdown}
-                className="flex items-center p-1 font-medium text-gray-700 uppercase border rounded-full cursor-pointer"
+                className="flex items-center p-2 font-medium text-gray-700 border rounded-full cursor-pointer"
               >
-                {user.email.charAt(0)}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-person-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                </svg>
               </p>
               {isDropdownOpen && (
                 <div
