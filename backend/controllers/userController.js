@@ -28,12 +28,11 @@ const loginUser = async (req, res) => {
 
 // SIGNUP A USER
 const signupUser = async (req, res) => {
-  const { email, link, firstName, lastName, pseudo, password } = req.body;
+  const { email, firstName, lastName, pseudo, password } = req.body;
 
   try {
     const user = await User.signup(
       email,
-      link,
       firstName,
       lastName,
       pseudo,
@@ -43,7 +42,7 @@ const signupUser = async (req, res) => {
     // Create a token
     const token = createToken(user._id);
 
-    res.status(200).json({ email, link, firstName, lastName, pseudo, token });
+    res.status(200).json({ email, firstName, lastName, pseudo, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -51,7 +50,7 @@ const signupUser = async (req, res) => {
 // UPADTE USER
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { email, link, firstName, lastName, pseudo, token } = req.body;
+  const { email, firstName, lastName, pseudo, token } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Invalid user ID" });
@@ -65,10 +64,6 @@ const updateUser = async (req, res) => {
 
   if (email) {
     user.email = email;
-  }
-
-  if (link) {
-    user.link = link;
   }
   if (firstName) {
     user.firstName = firstName;

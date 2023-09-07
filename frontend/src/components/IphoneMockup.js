@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const IphoneMockup = ({ user, userActiveLinks }) => {
-  console.log(userActiveLinks);
   return (
-    <div class="relative mx-auto border-gray-800  bg-gray-800 border-[14px] rounded-[2.5rem] md:h-[600px] h-[350px] md:w-[300px] w-[180px]">
+    <div class="z-0 relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] md:h-[600px] h-[350px] md:w-[300px] w-[180px]">
       <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
       <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
       <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>

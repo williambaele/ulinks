@@ -18,10 +18,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  link: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,
@@ -38,12 +34,11 @@ userSchema.statics.signup = async function (
   email,
   firstName,
   lastName,
-  link,
   pseudo,
   password
 ) {
   // Data validation
-  if (!email || !firstName || !lastName || !link || !password || !pseudo) {
+  if (!email || !firstName || !lastName || !password || !pseudo) {
     throw Error("All fields must be filled");
   }
   if (!validator.isEmail(email)) {
@@ -63,11 +58,6 @@ userSchema.statics.signup = async function (
     throw Error("Email already in use");
   }
 
-  const linlExists = await this.findOne({ link });
-  if (linlExists) {
-    throw Error("Link already in use");
-  }
-
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
@@ -76,7 +66,6 @@ userSchema.statics.signup = async function (
     pseudo,
     firstName,
     lastName,
-    link,
     password: hash,
   });
 

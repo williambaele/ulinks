@@ -66,9 +66,11 @@ const Signup = () => {
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
-                <div>
+                <div className="md:col-span-2">
                   <input
                     type="text"
+                    defaultValue={linkFromHeroBanner}
+
                     placeholder="Pseudo"
                     class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
@@ -76,7 +78,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div>
+                <div className="md:col-span-2">
                   <input
                     type="email"
                     placeholder="Email"
@@ -85,17 +87,6 @@ const Signup = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className="md:col-span-2">
-                  <input
-                    type="text"
-                    placeholder="Link"
-                    defaultValue={linkFromHeroBanner}
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
-                    required
-                    onChange={(e) => setLink(e.target.value)}
-                  />
-                </div>
-
                 <div className="md:col-span-2">
                   <input
                     type="password"
