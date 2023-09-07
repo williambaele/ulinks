@@ -13,7 +13,7 @@ const HeroBanner = () => {
       setErrorMsg("Please enter a valid link");
       return
     }
-    navigate("/signup", { state: { link: link } });
+    navigate("/signup",  {state: { link: link }});
   };
   return (
     <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-[calc(100vh-64px)]">
