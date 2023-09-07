@@ -52,7 +52,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="First Name"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                     onChange={(e) => setFirstName(e.target.value)}
                   />
@@ -61,7 +61,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="Last Name"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                     onChange={(e) => setLastName(e.target.value)}
                   />
@@ -70,7 +70,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="Pseudo"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                     onChange={(e) => setPseudo(e.target.value)}
                   />
@@ -80,17 +80,17 @@ const Signup = () => {
                   <input
                     type="email"
                     placeholder="Email"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div>
+                <div className="md:col-span-2">
                   <input
                     type="text"
                     placeholder="Link"
                     defaultValuevalue={linkFromHeroBanner}
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                     onChange={(e) => setLink(e.target.value)}
                   />
@@ -100,7 +100,7 @@ const Signup = () => {
                   <input
                     type="password"
                     placeholder="Password"
-                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    class="border py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                     onChange={(e) => setPassword(e.target.value)}
                   />
