@@ -30,6 +30,7 @@ const EditLinkRow = ({ link, user, toggleIsEdit }) => {
 
     const updatedLink = {
       ...link,
+      socialMedia: socialMedia,
       title: editTitle,
       link: editLink,
     };
