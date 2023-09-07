@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useLinksContext } from "../hooks/useLinksContext";
 
-const NormalLinkRow = ({ link, user }) => {
+const NormalLinkRow = ({ link, user, isEdit, toggleIsEdit }) => {
   const { dispatch } = useLinksContext();
 
   //SOCIAL ICONS
@@ -144,7 +144,6 @@ const NormalLinkRow = ({ link, user }) => {
   };
 
   const [active, setActive] = useState(link.active);
-  const [isEdit, setIsEdit] = useState(false);
 
   //SWITCH TO ACTIVE LINK
   const handleEditActive = async (e) => {
@@ -228,7 +227,7 @@ const NormalLinkRow = ({ link, user }) => {
 
   return (
     <div className="relative h-20 rounded-2xl ">
-      <div className="absolute top-0 right-0 flex items-center justify-center w-32 h-8 gap-4 bg-white shadow-sm rounded-tr-2xl rounded-bl-2xl">
+      <div className="absolute top-0 right-0 flex items-center justify-center w-32 h-8 gap-4 bg-green-200 shadow-sm rounded-tr-2xl rounded-bl-2xl">
         <div>
           {active === false ? (
             <svg
@@ -240,9 +239,9 @@ const NormalLinkRow = ({ link, user }) => {
               viewBox="0 0 16 16"
               onClick={(e) => {
                 e.preventDefault();
-
                 setActive(!active);
                 handleEditActive(e);
+                toggleIsEdit();
               }}
             >
               <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z" />
@@ -268,7 +267,6 @@ const NormalLinkRow = ({ link, user }) => {
         {isEdit ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            onClick={() => setIsEdit(!isEdit)}
             width="16"
             height="16"
             fill="currentColor"
@@ -279,7 +277,11 @@ const NormalLinkRow = ({ link, user }) => {
           </svg>
         ) : (
           <svg
-            onClick={() => setIsEdit(true)}
+          onClick={(e) => {
+            e.preventDefault();
+            handleEditActive(e);
+            toggleIsEdit();
+          }}
             xmlns="http://www.w3.org/2000/svg"
             width="14"
             height="14"
@@ -306,7 +308,7 @@ const NormalLinkRow = ({ link, user }) => {
           <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
         </svg>
       </div>
-      <div className="flex items-center h-full px-4 bg-white gap-x-4 rounded-2xl">
+      <div className="flex items-center h-full px-4 bg-red-200 gap-x-4 rounded-2xl">
       <div className="flex items-center justify-center w-1/6 h-full ">
         <p>{socialIcon}</p>
       </div>

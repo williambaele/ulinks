@@ -21,7 +21,12 @@ const LinkRow = ({ link, user }) => {
           toggleIsEdit={toggleIsEdit}
         />
       ) : (
-        <NormalLinkRow link={link} user={user} />
+        <NormalLinkRow
+          link={link}
+          user={user}
+          isEdit={isEdit}
+          toggleIsEdit={toggleIsEdit}
+        />
       )}
     </>
   );
