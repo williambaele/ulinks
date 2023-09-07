@@ -112,7 +112,7 @@ const ClientRow = ({ link }) => {
     }
   return (
     <Link to={link.link}>
-      <div className="flex items-center gap-4 px-4 my-2 bg-gray-200 shadow-sm cursor-pointer h-14 rounded-2xl hover:scale-105">
+      <div className="flex items-center gap-4 px-4 my-2 bg-gray-200 shadow-sm cursor-pointer h-14 rounded-2xl hover:bg-gray-200/60">
         {socialIcon}
         <p>{link.title}</p>
       </div>
