@@ -53,7 +53,7 @@ const Faq = () => {
               <div
                 onClick={() => setActiveQuestion(index)}
                 key={index}
-                className={`"hs-accordion pb-3 active p-2  ${activeQuestion === index ? "bg-white rounded-xl" : ""}`}
+                className={`"pb-3 active p-2  ${activeQuestion === index ? "shadow-sm " : "hover:opacity-70"}`}
               >
                 <button
                   class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500"
