@@ -16,7 +16,7 @@ const HeroBanner = () => {
     navigate("/signup",  {state: { link: link }});
   };
   return (
-    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-full md:h-[calc(100vh-64px)]">
+    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-full md:h-[calc(100vh-64px)] py-20 md:py-0">
       <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
         <div className="space-y-10">
           <h1 class="block text-5xl md:text-7xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
@@ -47,7 +47,7 @@ const HeroBanner = () => {
                 </div>
             
               <button
-                className="flex items-center justify-center col-span-1 bg-[#ffc971] rounded-2xl rounded-l-none font-bold text-gray-700"
+                className="text-sm md:text-lg flex items-center justify-center col-span-1 bg-[#ffc971] rounded-2xl rounded-l-none font-bold text-gray-700"
                 type="submit"
               >
                 Claim my link
@@ -57,7 +57,7 @@ const HeroBanner = () => {
           </div>
         </div>
 
-        <div class="h-full w-full rounded-xl object-center object-none	">
+        <div class="h-full w-full rounded-xl object-center object-none	hidden md:block">
           <img
             className="object-cover rounded-xl"
             src="https://images.pexels.com/photos/5081925/pexels-photo-5081925.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
