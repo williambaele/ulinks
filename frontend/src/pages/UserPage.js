@@ -32,7 +32,7 @@ const UserPage = ({ user, links }) => {
         <div className="flex items-center justify-center h-1/6">
           <h1 className="text-3xl font-bold text-center">@{user.pseudo}</h1>
         </div>
-        <div className="mx-auto space-y-4 overflow-scroll md:w-1/2 h-4/6">
+        <div className="flex flex-col gap-2 mx-auto overflow-scroll md:w-1/2 h-4/6">
           {userLinks.map((link) => (
             <ClientRow link={link} key={link._id} />
           ))}
