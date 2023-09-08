@@ -9,7 +9,7 @@ const Home = ({ user }) => {
   return (
     <>
       <Header user={user} />
-      <div className="flex flex-col bg-[#f3f3f1] px-4">
+      <div className="flex flex-col bg-[#f3f3f1]">
         <HeroBanner />
         <AppsSection />
         <Faq />

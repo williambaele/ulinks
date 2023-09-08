@@ -2,8 +2,8 @@ import React from "react";
 
 const Header = ({ user }) => {
   return (
-    <header className="sticky top-0 flex-wrap w-full h-16 text-sm">
-      <nav className="w-full py-3 mx-2 bg-white shadow-sm md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
+    <header className="sticky top-0 flex items-center w-full h-16 text-sm">
+      <nav className="w-full h-full px-2 bg-white shadow-sm align-center md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto">
         <div className="flex items-center justify-between">
           <a
             href="/"

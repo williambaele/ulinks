@@ -16,10 +16,10 @@ const HeroBanner = () => {
     navigate("/signup",  {state: { link: link }});
   };
   return (
-    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-[calc(100vh-64px)]">
+    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-full md:h-[calc(100vh-64px)]">
       <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
         <div className="space-y-10">
-          <h1 class="block text-7xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
+          <h1 class="block text-5xl md:text-7xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
             Create your link-in-bio <span class="text-blue-600">seamless.</span>
           </h1>
           <p class="text-2xl text-gray-800 ">
