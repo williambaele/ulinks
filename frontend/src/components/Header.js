@@ -1,9 +1,12 @@
 import React from "react";
 
 const Header = ({ user }) => {
+  const anchor = (area) => {
+    window.location.href = `#${area}`;
+  };
   return (
     <header className="sticky top-0 flex w-full h-16 text-sm">
-      <nav className="w-full h-full px-2 bg-red-200 shadow-sm md:flex md:py-0 md:px-6 lg:px-8 xl:mx-auto">
+      <nav className="w-full h-full px-2 bg-white shadow-sm md:flex md:py-0 md:px-6 lg:px-8 xl:mx-auto">
         <div className="flex items-center justify-between h-full">
           <a
             href="/"
@@ -44,25 +47,18 @@ const Header = ({ user }) => {
         </div>
         <div className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block">
           <div className="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-            <a
-              href="/"
-              className="font-medium text-gray-500 md:py-6 "
-              aria-current="page"
-            >
-              Apps
-            </a>
-            <a
-              href="/#avantages"
-              className="font-medium text-gray-500 hover:text-gray-400 md:py-6"
+            <div
+              onClick={() => anchor("avantages")}
+              className="font-medium text-gray-500 cursor-pointer hover:text-gray-400 md:py-6"
             >
               Avantages
-            </a>
-            <a
-              href="/"
-              className="font-medium text-gray-500 hover:text-gray-400 md:py-6"
+            </div>
+            <div
+              onClick={() => anchor("faq")}
+              className="font-medium text-gray-500 cursos-pointer hover:text-gray-400 md:py-6"
             >
               FAQ
-            </a>
+            </div>
             {!user ? (
               <div className="h-full p-3 px-5 bg-[#ffc971] rounded-full">
                 <a
